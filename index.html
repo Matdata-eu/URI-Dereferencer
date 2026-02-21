@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>URI Dereferencer</title>
+    <meta name="description" content="Linked Data URI dereferencing service with SPARQL integration">
+
+    <!-- Unregister stale service workers from previous projects -->
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(r) {
+            r.forEach(function(reg) { reg.unregister(); });
+        });
+    }
+    </script>
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+
+    <!-- Bootstrap CSS -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="/vendor/leaflet/dist/leaflet.css" id="leaflet-css">
+
+    <!-- Custom CSS -->
+    <link href="/assets/css/dereferencer.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid px-3 py-2">
+        <!-- Resource Header -->
+        <div id="resource" class="resource-header mb-2">
+            <div class="d-flex align-items-center flex-wrap gap-2">
+                <h1 class="resource-uri mb-0" id="resource-uri">
+                    <i class="bi bi-box-seam"></i>
+                    <span id="uri-display">Loading...</span>
+                </h1>
+                <button class="btn btn-sm btn-outline-secondary" id="copy-uri" title="Copy URI">
+                    <i class="bi bi-clipboard"></i>
+                </button>
+                <div class="rdf-formats ms-auto">
+                    <a href="#" id="link-turtle" class="badge bg-primary me-1">Turtle</a>
+                    <a href="#" id="link-rdfxml" class="badge bg-success me-1">RDF/XML</a>
+                    <a href="#" id="link-jsonld" class="badge bg-info">JSON-LD</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="text-center my-3">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading resource...</span>
+            </div>
+            <p class="mt-2 mb-0">Querying SPARQL endpoint...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error" class="alert alert-danger mt-2" style="display: none;">
+            <h5 class="alert-heading mb-1"><i class="bi bi-exclamation-triangle-fill"></i> Error</h5>
+            <p id="error-message" class="mb-0"></p>
+        </div>
+
+        <!-- RDF Code Viewer -->
+        <div id="rdf-viewer" style="display: none;" class="mb-2">
+            <div class="d-flex align-items-center gap-2 mb-1">
+                <h5 class="section-heading mb-0"><i class="bi bi-code-slash"></i> <span id="rdf-viewer-title">Turtle</span></h5>
+                <button class="btn btn-sm btn-outline-secondary ms-auto" id="rdf-copy" title="Copy to clipboard"><i class="bi bi-clipboard"></i></button>
+                <button class="btn btn-sm btn-outline-secondary" id="rdf-close" title="Close"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <pre class="rdf-code-block"><code id="rdf-code"></code></pre>
+        </div>
+
+        <!-- Properties Section -->
+        <div id="properties" style="display: none;" class="mb-2">
+            <h5 class="section-heading"><i class="bi bi-table"></i> Properties</h5>
+            <div class="table-responsive">
+                <table class="table table-sm table-striped table-hover mb-0" id="properties-table">
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="properties-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Map Section -->
+        <div id="map" style="display: none;" class="mb-2">
+            <h5 class="section-heading"><i class="bi bi-geo-alt-fill"></i> Geometry</h5>
+            <div id="map-container" style="height: 350px; border-radius: 4px; overflow: hidden;"></div>
+            <details class="mt-1">
+                <summary class="small text-muted">WKT Literal</summary>
+                <pre class="bg-light p-2 rounded mb-0 small"><code id="wkt-code"></code></pre>
+            </details>
+        </div>
+
+        <!-- See Also Section -->
+        <div id="see-also" style="display: none;" class="mb-2">
+            <h5 class="section-heading"><i class="bi bi-link-45deg"></i> See Also</h5>
+            <div id="see-also-loading" class="text-center">
+                <div class="spinner-border spinner-border-sm text-primary" role="status">
+                    <span class="visually-hidden">Loading related resources...</span>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush" id="see-also-list"></ul>
+        </div>
+    </div>
+
+    <footer class="text-center text-muted small py-1 border-top">
+        Powered by <a href="https://matdata.eu/">MatData</a> | Linked Data URI Dereferencer |
+        <a href="https://github.com/Matdata-eu/URI-Dereferencer" title="Source on GitHub"><i class="bi bi-github"></i></a>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- N3.js for RDF parsing -->
+    <script src="/vendor/n3/n3.min.js"></script>
+    
+    <!-- Leaflet JS -->
+    <script src="/vendor/leaflet/dist/leaflet.js" id="leaflet-js"></script>
+    
+    <!-- Proj4 for coordinate transformations -->
+    <script src="/vendor/proj4/dist/proj4.js"></script>
+    
+    <!-- Betterknown for WKT parsing (ESM module) -->
+    <script type="module">
+        import { wktToGeoJSON } from '/vendor/betterknown/betterknown.js';
+        window.wktToGeoJSON = wktToGeoJSON;
+    </script>
+    
+    <!-- Application code -->
+    <script src="/assets/js/config.js" defer></script>
+    <script src="/assets/js/dereferencer.js" defer></script>
+    <script src="/assets/js/map-viewer.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  dereferencer:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - SPARQL_ENDPOINT=${SPARQL_ENDPOINT:-https://jena.matdata.eu/rinf/sparql}
+      - BASE_URI=${BASE_URI:-https://data.matdata.eu}
+    restart: unless-stopped

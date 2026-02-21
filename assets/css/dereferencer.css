@@ -1,0 +1,164 @@
+/* URI Dereferencer - Compact Layout */
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #212529;
+}
+
+/* Resource Header */
+.resource-header {
+    border-bottom: 2px solid #0d6efd;
+    padding-bottom: 0.4rem;
+}
+
+.resource-uri {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    word-break: break-all;
+    color: #0d6efd;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.rdf-formats .badge {
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    padding: 0.3em 0.6em;
+}
+
+.rdf-formats .badge:hover {
+    opacity: 0.8;
+}
+
+/* Section Headings */
+.section-heading {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.4rem;
+}
+
+/* Properties Table */
+#properties-table {
+    font-size: 0.8rem;
+}
+
+#properties-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    padding: 0.3rem 0.5rem;
+    white-space: nowrap;
+}
+
+#properties-table td {
+    padding: 0.25rem 0.5rem;
+    vertical-align: top;
+}
+
+.property-uri {
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.property-uri:hover {
+    text-decoration: underline;
+}
+
+.property-prefix {
+    color: #6c757d;
+    font-size: 0.85em;
+}
+
+.property-label {
+    color: #0d6efd;
+    font-weight: 500;
+}
+
+.value-uri {
+    color: #0d6efd;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.value-uri:hover {
+    text-decoration: underline;
+}
+
+.value-literal {
+    color: #212529;
+}
+
+.value-datatype {
+    color: #6c757d;
+    font-size: 0.8em;
+    font-style: italic;
+    margin-left: 0.3em;
+}
+
+.value-lang {
+    color: #198754;
+    font-size: 0.8em;
+    font-weight: 500;
+    margin-left: 0.3em;
+}
+
+/* Map */
+#map-container {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* See Also */
+#see-also-list .list-group-item {
+    padding: 0.3rem 0.5rem;
+    border-left: 2px solid #0d6efd;
+}
+
+#see-also-list .list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+#see-also-list .resource-link {
+    color: #0d6efd;
+    text-decoration: none;
+    word-break: break-all;
+    font-size: 0.85rem;
+}
+
+#see-also-list .resource-link:hover {
+    text-decoration: underline;
+}
+
+#see-also-list .resource-type {
+    font-size: 0.75em;
+    color: #6c757d;
+}
+
+/* Loading */
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* RDF Code Viewer */
+.rdf-code-block {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin: 0;
+    max-height: 400px;
+    overflow: auto;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* Footer */
+footer {
+    font-size: 0.75rem;
+}

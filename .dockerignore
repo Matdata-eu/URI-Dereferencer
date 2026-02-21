@@ -1,0 +1,7 @@
+.git
+.gitignore
+*.md
+README
+.vscode
+.DS_Store
+Thumbs.db
