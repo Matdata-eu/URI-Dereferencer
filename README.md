@@ -4,6 +4,18 @@ Lightweight nginx Docker container for dereferencing Linked Data URIs via SPARQL
 
 ## Quick Start
 
+Pull the pre-built image from GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/matdata-eu/uri-dereferencer:latest
+docker run -p 8080:8080 \
+  -e SPARQL_ENDPOINT=https://example.org/sparql \
+  -e BASE_URI=https://example.org \
+  ghcr.io/matdata-eu/uri-dereferencer:latest
+```
+
+Or build locally:
+
 ```bash
 docker-compose up -d
 # or
@@ -18,7 +30,7 @@ Then open `http://localhost:8080/{resource-uri}`.
 | Variable | Default | Description |
 |---|---|---|
 | `SPARQL_ENDPOINT` | `https://jena.matdata.eu/rinf/sparql` | SPARQL endpoint URL |
-| `ENTITY_NS` | `https://data.matdata.eu` | Entity namespace for local routing |
+| `BASE_URI` | `https://data.matdata.eu` | Entity namespace for local vs external URI routing and nginx content negotiation |
 
 ## Usage
 
@@ -86,4 +98,4 @@ docker-compose down && docker-compose build --no-cache && docker-compose up -d
 
 ## License
 
-Part of the [MatData](https://matdata.eu/) semantic-tools collection.
+Licensed under the [Apache License 2.0](LICENSE). Part of the [MatData](https://matdata.eu/) semantic-tools collection.
