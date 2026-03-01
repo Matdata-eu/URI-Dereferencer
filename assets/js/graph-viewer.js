@@ -51,13 +51,18 @@ async function initializeGraph(quads, sparqlEndpoint, prefixes) {
     const bindings = quadsToBindings(quads);
     if (bindings.length === 0) return;
 
+    // graph plugin expects { prefixName: uri } but prefixes.json stores { uri: prefixName }
+    const invertedPrefixes = Object.fromEntries(
+        Object.entries(prefixes || {}).map(([uri, name]) => [name, uri])
+    );
+
     const mockYasr = {
         results: {
             getBindings: () => bindings,
         },
         resultsEl: container,
 
-        getPrefixes: () => prefixes || {},
+        getPrefixes: () => invertedPrefixes,
 
         executeQuery: async (sparqlQuery, { acceptHeader, signal } = {}) => {
             const params = new URLSearchParams({ query: sparqlQuery });
