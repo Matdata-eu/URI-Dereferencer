@@ -1,0 +1,220 @@
+/* styles/index.css */
+:root {
+  --yasgui-graph-uri: #97c2fc;
+  --yasgui-graph-literal: #a6c8a6ff;
+  --yasgui-graph-blank-node: #c5c5c5ff;
+  --yasgui-graph-type-object: #e15b13ff;
+  --yasgui-graph-text: var(--yasgui-text-primary, #000000);
+  --yasgui-graph-edge: var(--yasgui-border-color, #cccccc);
+  --yasgui-graph-edge-label: var(--yasgui-text-secondary, #666666);
+  --yasgui-graph-edge-label-bg: var(--yasgui-bg-primary, rgba(255, 255, 255, 0.8));
+  --yasgui-graph-background: var(--yasgui-bg-primary, #ffffff);
+  --yasgui-graph-canvas-bg: var(--yasgui-bg-primary, #ffffff);
+  --yasgui-graph-button-bg: var(--yasgui-accent-color, #4caf50);
+  --yasgui-graph-button-hover: var(--yasgui-link-hover, #45a049);
+  --yasgui-graph-button-text: var(--yasgui-button-text, #ffffff);
+  --yasgui-graph-empty-text: var(--yasgui-text-secondary, #666666);
+  --yasgui-graph-error-text: #f44336;
+  --yasgui-graph-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --color-blank-node: #ffff00;
+  --color-literal: #808080;
+  --color-rdf-type: #00ff00;
+  --color-uri: #0000ff;
+  --color-blank-node-dark: #ffeb3b;
+  --color-literal-dark: #9e9e9e;
+  --color-rdf-type-dark: #4caf50;
+  --color-uri-dark: #2196f3;
+  --bg-light: #ffffff;
+  --bg-dark: #1e1e1e;
+  --text-light: #666666;
+  --text-dark: #cccccc;
+  --text-error: #f44336;
+  --button-primary-bg: #4caf50;
+  --button-primary-bg-hover: #45a049;
+  --button-text: #ffffff;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+[data-theme=dark],
+.dark-theme {
+  --yasgui-graph-uri: #97c2fc;
+  --yasgui-graph-literal: #a6c8a6ff;
+  --yasgui-graph-blank-node: #888888;
+  --yasgui-graph-type-object: #e15b13ff;
+  --yasgui-graph-text: var(--yasgui-text-primary, #e0e0e0);
+  --yasgui-graph-edge: var(--yasgui-border-color, #666666);
+  --yasgui-graph-edge-label: var(--yasgui-text-secondary, #cccccc);
+  --yasgui-graph-edge-label-bg: var(--yasgui-bg-secondary, rgba(30, 30, 30, 0.8));
+  --yasgui-graph-background: var(--yasgui-bg-primary, #1e1e1e);
+  --yasgui-graph-canvas-bg: var(--yasgui-bg-primary, #1e1e1e);
+  --yasgui-graph-empty-text: var(--yasgui-text-secondary, #cccccc);
+}
+.yasgui-graph-plugin-container {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+.yasgui-graph-plugin-container canvas {
+  background-color: var(--yasgui-graph-canvas-bg);
+}
+.yasgui-graph-plugin-empty-state {
+  padding: 20px;
+  text-align: center;
+  color: var(--yasgui-graph-empty-text);
+}
+.yasgui-graph-plugin-error {
+  padding: 20px;
+  color: var(--yasgui-graph-error-text);
+}
+.yasgui-graph-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10000;
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+}
+.yasgui-graph-button {
+  padding: 8px 12px;
+  background: var(--yasgui-graph-button-bg);
+  color: var(--yasgui-graph-button-text);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: var(--yasgui-graph-shadow);
+  transition: background 0.2s ease;
+}
+.yasgui-graph-button:hover {
+  background: var(--yasgui-graph-button-hover);
+}
+.yasgui-graph-button:active {
+  transform: translateY(1px);
+}
+.yasgui-graph-settings-panel {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  z-index: 10001;
+  background: var(--yasgui-graph-button-bg, #4caf50);
+  background: var(--yasgui-bg-primary, #ffffff);
+  color: var(--yasgui-graph-text, #333333);
+  border: 1px solid var(--yasgui-border-color, #cccccc);
+  border-radius: 6px;
+  padding: 12px 14px;
+  min-width: 240px;
+  box-shadow: var(--yasgui-graph-shadow, 0 2px 8px rgba(0,0,0,0.2));
+  font-size: 13px;
+}
+.yasgui-graph-settings-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--yasgui-border-color, #cccccc);
+}
+.yasgui-graph-settings-section {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--yasgui-text-secondary, #888888);
+  margin: 10px 0 4px;
+}
+.yasgui-graph-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  cursor: pointer;
+}
+.yasgui-graph-settings-row input[type=checkbox] {
+  cursor: pointer;
+  accent-color: var(--yasgui-accent-color, #4caf50);
+}
+.yasgui-graph-settings-select {
+  font-size: 12px;
+  padding: 2px 4px;
+  border: 1px solid var(--yasgui-border-color, #cccccc);
+  border-radius: 3px;
+  background: var(--yasgui-bg-primary, #ffffff);
+  color: var(--yasgui-text-primary, #333333);
+  cursor: pointer;
+  max-width: 140px;
+}
+.yasgui-graph-settings-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.yasgui-graph-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.yasgui-graph-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+.yasgui-graph-plugin-container .vis-tooltip {
+  display: none !important;
+}
+.yasgui-graph-tooltip-container {
+  position: absolute;
+  background-color: rgba(28, 28, 32, 0.95);
+  color: #f0f0f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-family:
+    ui-monospace,
+    "SFMono-Regular",
+    "Menlo",
+    "Consolas",
+    monospace;
+  max-width: 340px;
+  white-space: normal;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+  z-index: 1000;
+  user-select: text;
+  cursor: text;
+}
+.yasgui-graph-tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.yasgui-tooltip-type {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: rgba(255, 255, 255, 0.5);
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 3px;
+}
+.yasgui-tooltip-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  line-height: 1.5;
+}
+.yasgui-tooltip-key {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  min-width: 58px;
+  flex-shrink: 0;
+}
+.yasgui-tooltip-val {
+  font-size: 11px;
+  color: #e8e8e8;
+  word-break: break-all;
+}
+/*# sourceMappingURL=yasgui-graph-plugin.esm.css.map */

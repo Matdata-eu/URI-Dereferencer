@@ -210,7 +210,16 @@ class URIDereferencer {
             // Parse and render resource
             await this.parseResource();
             this.renderProperties();
-            
+
+            // Render interactive graph
+            if (typeof window.initializeGraph === 'function') {
+                try {
+                    await window.initializeGraph(this.triples, CONFIG.SPARQL_ENDPOINT, PREFIXES);
+                } catch (graphError) {
+                    console.warn('Graph rendering failed:', graphError);
+                }
+            }
+
             // Check for geometry
             await this.checkForGeometry();
             
