@@ -25,6 +25,9 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="/vendor/leaflet/dist/leaflet.css" id="leaflet-css">
 
+    <!-- YASGUI Graph Plugin CSS -->
+    <link rel="stylesheet" href="/vendor/yasgui-graph-plugin/dist/yasgui-graph-plugin.esm.css">
+
     <!-- Custom CSS -->
     <link href="/assets/css/dereferencer.css" rel="stylesheet">
 </head>
@@ -99,6 +102,12 @@
             </details>
         </div>
 
+        <!-- Graph Section -->
+        <div id="graph-section" style="display: none;" class="mb-2">
+            <h5 class="section-heading"><i class="bi bi-diagram-3-fill"></i> Graph</h5>
+            <div id="graph-container" style="width: 100%; height: 600px; position: relative;"></div>
+        </div>
+
         <!-- See Also Section -->
         <div id="see-also" style="display: none;" class="mb-2">
             <h5 class="section-heading"><i class="bi bi-link-45deg"></i> See Also</h5>
@@ -138,5 +147,6 @@
     <script src="/assets/js/config.js" defer></script>
     <script src="/assets/js/dereferencer.js" defer></script>
     <script src="/assets/js/map-viewer.js" defer></script>
+    <script type="module" src="/assets/js/graph-viewer.js"></script>
 </body>
 </html>

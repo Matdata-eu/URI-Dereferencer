@@ -210,7 +210,16 @@ class URIDereferencer {
             // Parse and render resource
             await this.parseResource();
             this.renderProperties();
-            
+
+            // Render interactive graph
+            if (typeof window.initializeGraph === 'function') {
+                try {
+                    await window.initializeGraph(this.triples, CONFIG.SPARQL_ENDPOINT, PREFIXES);
+                } catch (graphError) {
+                    console.warn('Graph rendering failed:', graphError);
+                }
+            }
+
             // Check for geometry
             await this.checkForGeometry();
             
@@ -388,15 +397,18 @@ class URIDereferencer {
     }
 
     /**
-     * Shorten URI with prefix if possible
+     * Shorten URI with prefix if possible (longest/most-specific namespace wins)
      */
     shortenURI(uri) {
+        let bestNs = '';
+        let bestPrefix = '';
         for (const [namespace, prefix] of Object.entries(PREFIXES)) {
-            if (uri.startsWith(namespace)) {
-                return prefix + ':' + uri.substring(namespace.length);
+            if (uri.startsWith(namespace) && namespace.length > bestNs.length) {
+                bestNs = namespace;
+                bestPrefix = prefix;
             }
         }
-        return uri;
+        return bestNs ? bestPrefix + ':' + uri.substring(bestNs.length) : uri;
     }
 
     /**
