@@ -18,18 +18,8 @@
     <!-- Favicons -->
     <link href="/assets/img/favicon.png" rel="icon">
 
-    <!-- Bootstrap CSS -->
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="/vendor/leaflet/dist/leaflet.css" id="leaflet-css">
-
-    <!-- YASGUI Graph Plugin CSS -->
-    <link rel="stylesheet" href="/vendor/yasgui-graph-plugin/dist/yasgui-graph-plugin.esm.css">
-
-    <!-- Custom CSS -->
-    <link href="/assets/css/dereferencer.css" rel="stylesheet">
+    <!-- Runtime configuration (injected by entrypoint.sh) -->
+    <script src="/assets/js/config.js"></script>
 </head>
 
 <body>
@@ -125,28 +115,7 @@
         <a href="https://github.com/Matdata-eu/URI-Dereferencer" title="Source on GitHub"><i class="bi bi-github"></i></a>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- N3.js for RDF parsing -->
-    <script src="/vendor/n3/n3.min.js"></script>
-    
-    <!-- Leaflet JS -->
-    <script src="/vendor/leaflet/dist/leaflet.js" id="leaflet-js"></script>
-    
-    <!-- Proj4 for coordinate transformations -->
-    <script src="/vendor/proj4/dist/proj4.js"></script>
-    
-    <!-- Betterknown for WKT parsing (ESM module) -->
-    <script type="module">
-        import { wktToGeoJSON } from '/vendor/betterknown/betterknown.js';
-        window.wktToGeoJSON = wktToGeoJSON;
-    </script>
-    
-    <!-- Application code -->
-    <script src="/assets/js/config.js" defer></script>
-    <script src="/assets/js/dereferencer.js" defer></script>
-    <script src="/assets/js/map-viewer.js" defer></script>
-    <script type="module" src="/assets/js/graph-viewer.js"></script>
+    <!-- Application bundle (built by Vite) -->
+    <script type="module" src="/src/main.js"></script>
 </body>
 </html>

@@ -1,14 +1,26 @@
+# Build stage: install dependencies and run Vite build
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm ci
+
+# Copy source files and build
+COPY . .
+RUN npm run build
+
+# Runtime stage: serve built assets with nginx
 FROM nginxinc/nginx-unprivileged:alpine
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copy static files
-COPY assets /usr/share/nginx/html/assets
-COPY vendor /usr/share/nginx/html/vendor
-COPY index.html /usr/share/nginx/html/
+# Copy Vite build output
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Make js directory writable for config injection
+# Make assets/js directory writable for config injection
 USER root
 RUN chown -R 101:101 /usr/share/nginx/html/assets/js
 USER 101

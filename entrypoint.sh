@@ -10,8 +10,8 @@ echo "Configuring BASE URI: $BASE_URI"
 
 # Inject configuration into JavaScript config
 cat > /usr/share/nginx/html/assets/js/config.js <<EOF
-// Auto-generated configuration
-const CONFIG = {
+// Runtime configuration - auto-generated at container startup
+window.CONFIG = {
     SPARQL_ENDPOINT: '$SPARQL_ENDPOINT',
     ENTITY_NS: '$BASE_URI',
     BASE_URI: window.location.origin
